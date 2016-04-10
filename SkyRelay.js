@@ -1,7 +1,3 @@
-var
-// PORT
-PORT = 8726;
-
 require('./UJS-NODE.js');
 
 CPU_CLUSTERING(function() {
@@ -10,6 +6,12 @@ CPU_CLUSTERING(function() {
 	var
 	//IMPORT: dgram
 	dgram = require('dgram'),
+	
+	// config
+	config = JSON.parse(READ_FILE({
+		path : 'config.json',
+		isSync : true
+	})),
 	
 	// shared waiter store
 	sharedWaiterStore = SHARED_STORE('sharedWaiterStore'),
@@ -134,8 +136,8 @@ CPU_CLUSTERING(function() {
 	});
 	
 	server.on('listening', function() {
-		console.log('RUNNING SKY RELAY... (PORT:' + PORT + ')');
+		console.log('RUNNING SKY RELAY... (PORT:' + config.port + ')');
 	});
 	
-	server.bind(PORT);
+	server.bind(config.port);
 });
