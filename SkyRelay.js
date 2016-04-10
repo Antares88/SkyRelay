@@ -2,8 +2,7 @@ var
 // PORT
 PORT = 8726;
 
-require('./UPPERCASE.JS-COMMON.js');
-require('./UPPERCASE.JS-NODE.js');
+require('./UJS-NODE.js');
 
 CPU_CLUSTERING(function() {
 	'use strict';
@@ -135,7 +134,7 @@ CPU_CLUSTERING(function() {
 	});
 	
 	server.on('listening', function() {
-		console.log('RUNNING SKY RELAY SERVER... (PORT:' + PORT + ')');
+		console.log('RUNNING SKY RELAY... (PORT:' + PORT + ')');
 	});
 	
 	server.bind(PORT);
