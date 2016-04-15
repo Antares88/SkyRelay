@@ -92,7 +92,12 @@ CPU_CLUSTERING(function() {
 			
 			// check player waiting
 			else if (data.methodName === 'checkPlayerWaiting') {
-				response(sharedWaiterStore.get('waiter-' + data.version + '-' + data.roomId));
+				
+				waiterInfo = sharedWaiterStore.get('waiter-' + data.version + '-' + data.roomId);
+				
+				if (waiterInfo !== undefined) {
+					response(waiterInfo);
+				}
 			}
 			
 			// for find player
