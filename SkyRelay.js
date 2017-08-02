@@ -7,7 +7,7 @@ CPU_CLUSTERING(() => {
 		isSync : true
 	}));
 	
-	let sharedWaiterStore = SHARED_STORE('sharedWaiterStore');
+	let waiterStore = SHARED_STORE('waiterStore');
 	
 	let server = UDP_SERVER(config.port, (requestInfo, content, response) => {
 		
@@ -35,7 +35,7 @@ CPU_CLUSTERING(() => {
 				// check player waiting
 				else if (data.methodName === 'checkPlayerWaiting') {
 					
-					let waiterInfo = sharedWaiterStore.get('waiter-' + data.version + '-' + data.roomId);
+					let waiterInfo = waiterStore.get('waiter-' + data.version + '-' + data.roomId);
 					
 					if (waiterInfo !== undefined) {
 						response(STRINGIFY(waiterInfo));
@@ -45,14 +45,14 @@ CPU_CLUSTERING(() => {
 				// for find player
 				else if (data.methodName === 'findPlayer') {
 					
-					let waiterInfo = sharedWaiterStore.get('waiter-' + data.version + '-' + data.roomId);
+					let waiterInfo = waiterStore.get('waiter-' + data.version + '-' + data.roomId);
 					
 					// wait.
 					if (waiterInfo === undefined) {
 						
 						response('waiting');
 						
-						sharedWaiterStore.save({
+						waiterStore.save({
 							id : 'waiter-' + data.version + '-' + data.roomId,
 							data : {
 								ip : ip,
@@ -76,7 +76,7 @@ CPU_CLUSTERING(() => {
 						
 						response(STRINGIFY(waiterInfo));
 						
-						sharedWaiterStore.remove('waiter');
+						waiterStore.remove('waiter');
 					}
 				}
 			}
