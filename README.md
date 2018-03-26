@@ -1,6 +1,11 @@
 # SkyRelay
 실시간 멀티플레이 게임을 구현하고자 할 때 홀펀칭에 사용되는 릴레이 서버입니다.
 
+## 설치하기
+```
+git clone https://github.com/Hanul/SkyRelay
+```
+
 ## 설정
 `config.json` 파일을 수정합니다.
 ```javascript
